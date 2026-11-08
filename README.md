@@ -15,38 +15,42 @@ Describe your goal in plain language to `$guide` if you are unsure which skill f
 
 ## Skills
 
-### Workflow skills
+### Workflow
 
-- `explore`: Investigate a problem through user-led questions. Starts from the context the user provides, answers questions with evidence gathered through scouts, and records settled decisions and findings in the change's scratch folder when exploration ends.
-- `shape`: Settle what a solution must do and what is out of scope by resolving the open decisions in a design tree. It covers behavior and decisions, not implementation.
-- `design`: Define the system-level design for a settled problem, one area at a time, then hand the settled design to `write-documentation` when documentation is needed.
-- `program-design`: Turn a settled design or user-confirmed change into a code-level plan covering the affected parts, their interfaces, call paths, files, and conventions.
-- `test-design`: Define test cases and manual validations before implementation, using classification trees and a combination matrix.
-- `implement`: Coordinate implementation from the settled design and test matrix. It includes automated checks, manual validation, agentic review, consistency reconciliation, and a final status report.
-- `implement-with-tdd`: Run implementation test-first with a tester and implementer, then continue with `implement`'s manual validation.
-- `validate`: Run the manual validations against the local system, capture evidence, restore records changed during the run, and report results.
-- `agentic-review`: Review a change for reuse, simplification, efficiency, abstraction level, and project conventions; apply in-scope improvements over up to three rounds.
-- `code-blast-radius`: Trace where a written change's behavior reaches its consumers within the project.
-- `human-review`: Check observations the user makes about a change against the code, discuss the assessment, and wait for the user's decision before editing.
-- `write-documentation`: Write or update a note in the project's documentation, following its charter and templates.
+The stages describe the usual path through a change:
 
-### Supporting skills and tools
+1. `explore`: Investigate the problem through user-led questions and record settled decisions and findings.
+   - `explore-with-canvas`: Work through the same exploration on a visual canvas.
+2. `shape`: Settle what the solution must do and what is out of scope; this covers behavior, not implementation.
+   - `shape-with-canvas`: Resolve the same behavior decisions on a visual canvas.
+3. `design`: Define the system-level design for the settled problem, then hand it to `write-documentation` when needed.
+   - `design-with-canvas`: Work through the same system design on a visual canvas.
+4. `program-design`: Turn the settled design into a code-level plan covering affected parts, interfaces, call paths, files, and conventions.
+   - `program-design-with-canvas`: Work through the same code-level plan on a visual canvas.
+5. `test-design`: Define test cases and manual validations before implementation, using classification trees and a combination matrix.
+   - `test-design-with-canvas`: Work through the same test design on a visual canvas.
+6. `implement`: Coordinate implementation from the settled design and test matrix, including checks, validation, review, reconciliation, and a status report.
+   - `implement-with-tdd`: Use a test-first implementation procedure, then continue with `implement`'s manual validation.
+7. `validate`: Run manual validations against the local system, capture evidence, restore changed records, and report results.
+8. `agentic-review`: Review for reuse, simplification, efficiency, abstraction level, and project conventions; apply in-scope improvements.
+9. `code-blast-radius` and `human-review`: Trace the change's impact, then assess the user's observations against the code before editing.
+10. `write-documentation`: Update project documentation according to its charter and templates.
+
+### Other skills used by the workflow
 
 - `guide`: Route a goal stated in plain language to a suitable skill.
-- `lookup`: Route fact-finding to code scouts, documentation scouts, or external research, and distinguish verified facts from source claims.
-- `spike`: Run a small experiment when reading code or documentation cannot answer a question.
+- `lookup`: Route fact-finding to code scouts, documentation scouts, or external research.
+- `spike`: Run a small experiment when code and documentation cannot answer a question.
 - `prototype`: Build and iterate on an interactive screen prototype.
 - `architecture-exploration`: Explore system parts and architecture options with the user on a canvas.
 - `canvas`: Draw and edit diagrams, mockups, and other visual work on a local tldraw canvas.
-- `fast-track`: Apply its faster question and confirmation rules when used with supported canvas stages.
-- `agent-browser`: Browser automation used by browser-based validation and canvas tooling.
+- `fast-track`: Use faster question and confirmation rules with supported canvas stages.
+- `agent-browser`: Provide browser automation for browser-based validation and canvas tooling.
 - `wiki`: Read the project's technology knowledge and conventions through its index.
 - `report`: Provide the response shape used by implementation reports.
-- `implementation-status-report`: Summarize the current state, questions, results, and open items from an implementation run.
+- `implementation-status-report`: Summarize state, questions, results, and open items during implementation.
 
-Canvas variants run the corresponding stage visually: `explore-with-canvas`, `shape-with-canvas`, `design-with-canvas`, `program-design-with-canvas`, and `test-design-with-canvas`.
-
-Skills loaded by other skills: `basics`, `docs`, `design-tree`, and `changeset` provide shared rules or formats used by the workflow.
+`basics`, `docs`, `design-tree`, and `changeset` are shared instruction and format skills loaded by other skills.
 
 ## Agents
 
@@ -63,25 +67,6 @@ Skills loaded by other skills: `basics`, `docs`, `design-tree`, and `changeset` 
 - `conventions-reviewer`: Check a change against one project convention source.
 - `usage-tracer`: Trace consumers of one changed element.
 - `consistency-checker`: Find implementation leftovers and mismatches between the code and project documentation.
-
-## Workflow
-
-The stages describe the usual path through a change:
-
-| Stage | Skill | Purpose |
-|---|---|---|
-| 1 | `explore` | Understand the problem and investigate what is needed. |
-| 2 | `shape` | Agree on the behavior and scope of the solution. |
-| 3 | `design` | Define the system's data, flows, rules, and components. |
-| 4 | `program-design` | Specify the code parts, interfaces, call paths, and files involved. |
-| 5 | `test-design` | Define the tests and validations that will demonstrate the change works. |
-| 6 | `implement` | Implement the change, including its validation and review procedure. |
-| 7 | `validate` | Check the behavior in the running system. |
-| 8 | `agentic-review` | Review and improve the code within the settled decisions. |
-| 9 | `code-blast-radius` and `human-review` | Trace the change's impact and review it with the user. |
-| 10 | `write-documentation` | Update the project documentation to reflect the change. |
-
-Supporting skills help with specific questions or visual work as needed. The `with-canvas` variants use the corresponding stage's procedure on a canvas.
 
 ## Project knowledge and documentation
 
