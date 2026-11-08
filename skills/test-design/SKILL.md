@@ -1,0 +1,69 @@
+---
+name: test-design
+description: "Turns a settled design into the test cases and manual validations that prove it, before the implementation exists, using the Classification Tree Method (CTM): entry points or flows as roots, classifications, partitions, then a combination matrix per branch with each row marked as an automated test, a manual validation, or both. The user settles every level; the skill derives candidates only from what is already decided. Use after design or program design, before implement."
+---
+
+Load $basics first, then $design-tree, taking from it the tree format and its marks only; the mechanics here are different and stated below. Then read `.mahou/test-design.md` if present. Follow the wiki index to the testing entries for the runners the project uses, and read the project's own testing conventions where it keeps them, usually its `AGENTS.md`: they decide the test level and the naming rule the rows follow.
+
+# Test design
+
+This skill applies the Classification Tree Method. Decompose a test object into the aspects that influence its behaviour, the classifications. Split each classification into disjoint classes, the partitions. A test case is a combination that picks one class per classification. Every question at every level is about what varies, how it is partitioned, and which combinations matter.
+
+Takes a design the user has settled and produces a tree whose leaves are the test cases and manual validations that prove the change, plus the combination matrix each branch resolves into. The matrix is built before any code exists so that whoever implements the change receives it as input. When the design tree is not at hand, the notes that record the design carry the decisions.
+
+## How the tree is built
+
+The user and the skill build the tree together, level by level: roots, then for one branch at a time its classifications, its partitions and its matrix. Every candidate comes from something already decided: a design leaf, a note's section, a fact read from the code. The skill shows the candidate for confirmation. The user confirms, cuts, merges or adds, and the next level opens on that answer.
+
+The tree uses `design-tree`'s marks: `pending`, `open`, `settled`. Show the whole tree when the roots are confirmed, when a branch settles and at the end; otherwise show only the branch being worked. Row ids carry a running number with the prefix `A`: `A1`, `A2`, `A3`. A row can then be named from anywhere later.
+
+## Roots
+
+- On a service, a root is an entry point whose behaviour the change touches: an endpoint, a job, an event handler, a command, any way into the code. List the candidates from the design and, when code exists, from the diff, with what the change does in each, and let the user drop the ones the change does not reach. An entry point the change only crosses without altering its outcome is not a root; say why when the user asks.
+  - A data migration has no root and no classification of its own. The other rows assume it ran. One manual row, outside the classifications, checks that its upgrade and its downgrade work.
+  - A piece that runs only inside another entry point, such as a processor that executes during a read, is a classification of that entry point's branch, not a root.
+- On a user-facing surface, a root is a main flow the change touches, including returning to a screen the user already completed when the change stores something there. The tree for such a surface covers each state a screen can show and each action that moves between them, so it is more exhaustive than a service's.
+- On a user-facing surface, each placement of a flow, such as the same dialog opened from two parts of a page, is its own root. Each placement gets rows for every state and action the other placements cover.
+- On a service, when two roots reach the same code the change adds, read the code to find which root reaches the added code on the usual path, and let the user confirm. The usual root carries the full matrix. The other root's branch covers only what that root's path adds, such as the states the root starts from. The branch title states that scope. Under that branch, list each classification the usual root already covers, with the rows that cover the classification, so none is hidden.
+
+## Working a branch
+
+Open one branch at a time, each on the approval of the previous.
+
+1. **Classifications.** Read the existing test suite for the root's entry point, then derive the classifications from the inputs, states and outcomes the change affects: the input the entry point receives, the state it starts from, the configuration it reads, the responses of the systems it calls, the actor and how the actor arrives, and the outcome itself when the outcome branches. A classification that only the existing suite exercises, and that the change leaves untouched, stays out of the branch. Two sources add classifications to that list:
+   - **Shared code the change alters.** List the code the change alters that other cases of the entry point also run through, such as a query, a helper or a component that every poll type passes through. The branch adds the classification that separates those cases, and the existing tests that run through the shared code become rows of the matrix as regression rows.
+   - **Variants settled earlier.** Each variant that the design, the notes, the prototypes or the conversation named in an earlier stage is its own partition, so every decision gets a test.
+
+   Show each classification with the design leaf, the shared code or the variant it comes from. Rules the user applies and the skill proposes when it sees them:
+   - Two classifications whose partitions determine each other are one classification. If every partition of the first fixes the partition of the second, merge them and carry the expectation on the partition.
+   - A classification with one interesting partition scopes the branch instead of staying a classification when no existing test in the root's suite exercises the other partitions. State the scope in the branch title.
+2. **Partitions.** One list per classification, each partition with its expected effect when the design fixes it. Two partitions that the code treats identically are one partition, unless one of them is a variant settled in an earlier stage. When every input takes the code down the same path, the root is one row. A partition the design does not decide is asked, not filled in.
+3. **Matrix.** One row per case inside the branch's classifications, including the cases the existing test suite already covers and the cases the change adds. Never drop a row because an existing test already covers it. A row picks one partition per classification. Every partition appears in at least one row, and the pairs of partitions that interact appear together. Columns: a narrow `★` column (`★` when the row is a new test added by the change, blank when the test already exists in the suite, whether kept as is or updated to match the row), the row id, a one-sentence summary of what the test does (not the test's function name), one column per classification, the expected outcome, the kind (`test` for an automated test through the entry point at the level the project's conventions name, `manual` for a validation by hand against the running system, or both), and the setup column. Some rows need environment preparation: a seeded record, a configuration, a variant of an input. The setup column names that preparation and never includes test names. The skill builds the matrix and proposes the manual picks; the user adjusts rows and settles the picks.
+
+Pick the manual checks from the test rows: a picked row's kind becomes `test + manual`, and its expected outcome adds what the check observes by hand. On a service they always include the most common flows and the most common error cases. A row is `manual` alone only when no automated test can check it. Schema rejections are not manual picks. On a surface with no test runner, every row is manual; whether it has one is a fact read from the project, surfaced when its branch opens.
+
+## Facts
+
+The design is settled, so read the code whenever a partition, an expectation or a root depends on how the code behaves, without waiting to be asked. Before stating the state a root's rows start from, trace the entry point's call order up to the code the change adds: what runs before it and what is created after it. A starting state taken from the design alone is a guess. Surface every fact read this way in the level it affects; never apply one silently. When a fact contradicts a decision already settled, say so in the first sentence. A row whose expectation the code cannot meet is either corrected or becomes an implementation task; the user decides which, and record the task under the branch so the implementation receives it.
+
+## Dropping rows and deleting existing tests
+
+A row is dropped, never silently, when no realistic input reaches it. Examples of the kind of reason, not a list: two systems sharing the same schema cannot produce a validation error between them; a malformed response from another of our services is a programming error, unless the design makes one side validate the response's shape; input that the request type cannot carry, such as a field the request does not declare, never reaches the code; a value that only a hidden record carries cannot appear in a response; a state the flow cannot re-enter cannot be observed. State the reason in one line under the branch (`Dropped: <reason>`), so the row is not proposed again.
+
+When the change alters or removes behaviour so an existing test in the suite no longer applies and is not updated as a row in the matrix, list it in one line under the branch (`Deleted: <test and reason>`). When no existing test is deleted, omit the line.
+
+## Recording the design back
+
+Questioning a tree settles more than tests: a member the design missed, a mechanism renamed mid-round, a gap the partitions exposed. Collect every amendment the tree produced, from what was read during the work; when the set is incomplete, say so. The user settles each one: amend the note, or carry it as an open decision.
+
+Then run $write-documentation once, handing it every settled amendment together, so it weighs how the changes affect the whole documentation rather than only the pieces the tree touched. An amendment landed during test-design follows the recording discipline the design itself followed: the text is shown before it lands.
+
+## Ending
+
+When the tree is settled, show it with the row range, the count of test rows and the manual picks, and list the implementation tasks it surfaced. Write the settled tree with its matrices to the change's scratch folder, at `test-design.md`, so it survives the session. $implement takes the tree as input; $validate runs the manual rows.
+
+Then check the scratch folder as $basics says under Status.
+
+## What this skill is not
+
+It does not write tests and does not run anything. It does not propose a case the design does not imply.

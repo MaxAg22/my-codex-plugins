@@ -1,0 +1,70 @@
+---
+name: write-documentation
+description: Write or update a note in the project's docs folder explaining how one part of the system works, following the project's own charter and templates. Use when the user wants something documented, a mechanism written up, a note brought back in line with the code, or when $design hands over a settled tree to record.
+---
+
+Load $basics first, then $docs. Then read `.mahou/write-documentation.md` if present.
+
+# Write documentation
+
+A note explains how a part works, in the present tense, and it is what someone reads instead of the code when they need to understand that part. This skill writes one, or brings one back in line with the code.
+
+Resolve the docs folder as `docs` says, and read the charter and the target folder's README before writing a line. The charter decides the headings, the callouts, the diagrams, the wrapping, the frontmatter, the naming rule and how the indexes work. Where it is more specific than anything here, it wins. This skill carries no template body.
+
+Most of the time a draft already exists. When $design hands over a tree, each settled branch carries mechanism-first prose and a diagram, and writing the note is mostly moving that text into place. When the user asks for a mechanism to be written up, the code is the source and a `code-scout` reads it so the reading stays out of this conversation.
+
+## 1. Pick the folder, and say which
+
+Use the charter's folder table and, when the project's `AGENTS.md` has a section on where each kind of change is documented, that section. Announce the folder and the reason in one line before writing. A note in the wrong folder is worse than a missing one, because readers find it, trust it and never look for a second copy.
+
+Search the folder first and **prefer extending the note that already covers it**. A new section in the right note beats a new note beside it, and near-duplicates are how an index stops being readable. Check the name against every file in the docs folder before creating one; the charter usually says why a collision matters.
+
+## 2. Write it
+
+The charter owns the shape. The content rules are the framework's:
+
+**Overview, then mechanism.** The overview says what the part is and is responsible for, in a few sentences a reader can stop after. Then the shape of the data, what calls what, in what order, in the sections from the template's menu that the subject needs and in the order that reads best, as `docs` describes. This is the bulk of it. A reader should be able to follow the part without opening the source.
+
+**Explain the code, do not reprint it.** A declaration belongs in the file it lives in, where it is typechecked and stays current. What a reader cannot get from that file is why each part exists and who asks it, so the surface goes in a table of what each member answers, and the behaviour goes in prose or a diagram. A snippet survives only where the code *is* the insight, at two to four lines.
+
+**The reasoning goes beside the thing it justifies, never as the note's structure.** Opening with the argument makes the reader meet the case for the design before the design. Keep the argument, since it is what lets a decision be revisited rather than re-argued, in the callout form the charter names, next to the mechanism. State the actual reason, not its provenance: "a strict test would freeze a thing already overlapping a wall", not "because the investigation showed".
+
+**Every section explains something that exists.** A section that only introduces, summarizes or lists what other sections hold does not belong.
+
+**A diagram whenever the subject has a shape.** A state machine, a data model, a sequence or a request's path all read faster drawn. Follow the charter's convention; where it names mermaid, do not draw in ASCII. Place each diagram next to the prose it illustrates.
+
+**An attachment sits where the prose refers to it.** A prototype, an image or an exported drawing goes where the charter puts attachments, linked at the point the prose needs it, with a caption that names what it shows. The note keeps no local or scratch path to the file.
+
+**Strip the working session out of the note.** The tree or code a note comes from may name projects, tools, repositories and the current implementation; the note gets shared, so the draft drops them. In the draft:
+
+- Name roles, not products, when the design is generic: "the assistant" rather than a product's name, unless the design is that product's alone.
+- Name another note or tool only when the design depends on it, and then as a link at the point of dependency, never collected in a list at the end.
+- No component, library or package names.
+- No description of the current implementation or of what a repository still lacks; those descriptions belong to tasks.
+- No sentences about who owns a piece of work.
+- Never describe the prototype's controls or its file.
+- Cut any sentence that compares the design with how things work today.
+
+## 3. Describe the present
+
+No "used to", no "previously", no "no longer", no "replaced by". A rejected alternative is *considered and not chosen, because…*, a standing reason, not a history of the argument.
+
+This matters most when updating, which is most of the time. Change only what actually changed; if a section still describes the code correctly, leave it exactly as it is. Insert new behaviour without disturbing what is there. Delete behaviour that is gone; do not annotate it as removed. A note rewritten wholesale to accommodate one paragraph is a diff nobody can check.
+
+## 4. Check the draft before anyone sees it
+
+Dispatch a `documentation-reviewer` with the draft, the charter, the folder README and the template, and apply what it reports: those are departures from rules the project wrote for itself, so applying them is not a decision. Anything it reports that turns on the content rather than the form goes to the user as a question.
+
+Then show the whole draft in the conversation and wait. Nothing lands in a file the user has not seen.
+
+**How a draft is shown.** Plain markdown in the reply, never quoted, never as a code block, never in the browser. One paragraph of prose first: what changes and why. Then, per note, a bold line with the note's path, and for each edit one line of prose naming where it lands ("Replace the last sentence of <section>:", "New section before <section>:", "Append to <section>:", "<table>, <row>, <column>:"), with the section names as they read in the note, followed by the edit itself exactly as it will read in the file, headings and mermaid blocks included. A horizontal rule separates notes. A new note is shown whole under its path line with no location lines. The location lines are the only prose between edits; everything else after the opening paragraph is draft.
+
+## 5. Land it in its index
+
+Write the agreed draft. **Link it from at least one existing note**, or nobody reads it.
+
+Then check how the folder's index works. A generated index means the note appears by existing, *provided its tag is right*: confirm the tag against the charter and the neighbouring notes, because a wrong tag drops a note out of its index silently, with no error anywhere. A hand-maintained table means adding this note's row and nothing else; do not touch the others.
+
+## 6. Say what you wrote
+
+Which note, which folder, which sections are new or changed, and what you deliberately left untouched. If reasoning went into a callout, quote it: it is the part written on the user's behalf, and it is short enough to read.

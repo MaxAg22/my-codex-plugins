@@ -1,0 +1,108 @@
+---
+name: program-design
+description: Turns a settled system design, or a change proposed in the conversation, into a program design, the level between the design and the code. Works a design tree, proposing each branch's layout, components, state, call path, interfaces and files from the code and the conventions, and settling them with the user one part at a time. Every part is a representation, never code. Use after design, before implementation.
+---
+
+Load $basics first, then $design-tree and $docs. Then read `.mahou/program-design.md` if present. From `design-tree` this skill takes the tree: its format, its marks, and how the tree records a settled decision as a leaf. It does not take that skill's question mechanics. There are no numbered rounds here and no questions that withhold a preference. This skill proposes, the user corrects, and the tree records what they settled.
+
+# Program design
+
+Takes a change whose decisions are settled and specifies how it lands in the code: which packages, screens, components, values, call paths, interfaces and files change, under which conventions. The design already made the decisions, so the proposals here work through the details and check that they do not drift from what the design expects. That is why this skill proposes, against the rule in `basics` against recommending: a proposal grounded in the code and the conventions is a fact for the user to correct, not a choice made for them.
+
+## The level
+
+Every part rests on the code and follows the conventions, and every part is a representation of the code, never the code itself. No function bodies, no declarations in the language's syntax, no snippet that would compile. A shape is a JSON Schema, a call path is a callstack, a value is a line in a derivation ledger, a file is a path in the module list. When a part cannot be stated without writing code, the part is too low; say so and lift it.
+
+The user can ask to see a part as code, such as a diff of the change against the code as it stands, to understand how the part changes the code as it stands. Draw the code next to the part it details, marked as a sketch, and keep it out of the record. The part stays the representation, and the code is not a decision the user settles.
+
+Because it proposes, ground every proposal in the code and in the conventions you read for the change. With each proposal, cite the code or the convention it follows, the code as a reference in the form `basics` gives under Referencing code. A proposal with nothing behind it is a guess, and the user cannot tell the two apart.
+
+When a part changes something that exists, its representation shows what the change adds, alters and removes, marked the way the part's reference says.
+
+Some parts carry complex logic or solve a problem other code already solves, such as reading a standard format or running a well-known algorithm. Before proposing one, look for existing code that does the job. Look first at the project's own code: a package or service of its own, or a library it already depends on. Then look at maintained libraries. For each candidate, say where the project already uses it, how actively it is maintained, its size and its license. Propose the project's own solution or a library it already uses over a new dependency, and a library over hand-written code. The user picks.
+
+## Opening
+
+1. **Name the source.** The design notes when the change has them. Otherwise the change proposed in the conversation, which the user confirms as the source. A change that needs a data model, a new flow or a new contract and has no design notes has not been designed yet: say that $design has not run, and ask whether to run it first.
+
+2. **Load the context.** Read the source and the research or references the user names. A `docs-scout` reads the notes so they stay out of this conversation. Then read the code around what the change touches: the packages, screens, endpoints, services, schemas and types it names, their callers, and the tests that cover them. This reading is what the proposals are made of.
+
+3. **State the open points.** Whether the source is current and what is in and out of scope. Wait for the answers.
+
+4. **Map what the source defers.** Walk the source and list, flat and unordered, what it leaves for program design to specify. The user drops or absorbs items they consider implementation noise and adds what the source does not name.
+
+5. **Propose the branches.** A branch is a surface: one screen; one entry point, an endpoint, a job, an event handler, a command; or one package, when the change creates, splits or changes how a package is built or shipped. Propose the order the branches are worked in and where the first one starts. The user corrects the map and settles it before any branch opens.
+
+```
+Program design
+├─ <package, screen or entry point>                           open
+└─ <package, screen or entry point>                           pending
+```
+
+## Working the tree
+
+Read the wiki entries for the technologies the change uses and the project's rules that govern it (its `AGENTS.md`, `.mahou/basics.md` and any rule file the project keeps), before proposing the first part. List what you read in the message that proposes the first part.
+
+Branches change as the work goes. The user renames, merges, splits or drops them, and a settled branch that reopens goes back to open, as `design-tree` states.
+
+The tree also carries **standards**. It does not close while they are missing; when the user asks to close it anyway, say so and open them. The test cases and manual validations are designed in $test-design once the program design is settled.
+
+### Working a branch
+
+A branch is worked in parts, in order. Each part is one short message: the proposal in its representation, the facts and conventions behind it, and one question at the end asking whether it holds. Never open the next part before the current one settles, and never render the whole branch at once. Apply the user's corrections to a part in place before the next part starts.
+
+A package branch, in order:
+
+1. The package layout.
+2. What the program does from its entrypoint, as a control flow.
+3. The interfaces between the package's parts and the module list, rendered together.
+
+A screen branch, in order:
+
+1. The screen layout, worked on a prototype: open the design's prototype with $prototype, or create one with that skill when the screen has none. Update the prototype to match what the design and the branch settled, and iterate it with the user until it shows the final screen. The prototype settles how the screen looks and behaves, never how it is coded.
+2. The component tree. Every component it names carries its source: the component a wiki entry defines for that screen, or an app component when none does. Propose the tree from the wiki's frontend entries first, so a screen an entry already covers never becomes custom code.
+3. The state, as a derivation ledger.
+4. The interfaces and the module list, rendered together.
+
+An entry point branch, in order:
+
+1. The call path, as a callstack.
+2. The interfaces and the module list, rendered together, with a class diagram when stored fields change.
+3. The critical behaviour, one part per decision the entry point makes that is not mechanical, as a derivation ledger, a control flow, or as prose. Business rules in a service method, what an absent value resolves to, which side of a boundary enforces what.
+
+The orders list the parts a branch can have. Work only the parts that settle something for this branch. When the branch opens, say which parts it skips and why. A branch that only adds a field to an existing schema needs only its interfaces and module list, with no callstack. A branch that fits none of these orders is worked out with the user before it starts. When the rendering of a screen element is what is undecided, hand that part to $prototype and record what the prototype settled. When no representation in the catalogue fits a part, say so rather than forcing one.
+
+**Flag departures from the source.** When a settled part contradicts the design notes or the confirmed change, say so in the first sentence and name what the source would have to say instead. Record the departure as a decision, and carry it to the ending.
+
+### Standards
+
+The standards branch lists, per source of conventions, what it governs in this change. Derive it after every other branch has settled, since what each source governs depends on what those branches settled. Show it and write it to the record, and mark it settled without asking the user to confirm it.
+
+## Representations
+
+| The part settles | Reference |
+|---|---|
+| How a package is distributed, built and run | `references/representations/package-layout.md` |
+| A change to what a screen shows | `references/representations/screen-layout.md` |
+| A composition of components after the change | `references/representations/component-tree.md` |
+| Where values come from and how they derive | `references/representations/derivation-ledger.md` |
+| What crosses between parts: props, inputs and outputs, payloads | `references/representations/interfaces.md` |
+| The files the branch creates, changes or deletes | `references/representations/module-list.md` |
+| A storage or schema change, derived from the design's data model | `references/representations/class-diagram.md` |
+| The path one request takes through the layers, and where a value lands | `references/representations/callstack.md` |
+| The order of an entry point's steps, which failures end it and what it hands back, or how several actors interact | `references/representations/control-flow.md` |
+| Which conventions govern the change | `references/representations/standards.md` |
+
+Each reference says what the part covers, what to read before proposing it, the representation, and when it fits. A part that fits none is worked out with the user.
+
+## The record
+
+One markdown file in the change's scratch folder at `program-design.md`. It opens with what it covers and what it leaves out. Then one section per branch, in the order they settled, each holding that branch's parts in the order they were worked. The standards close the file. Edit a reopened branch in place. Address annotations the user leaves on a file one by one, reporting each change against its annotation.
+
+## Ending
+
+When every branch is settled, compare the settled tree against the source and list what the program design decided that the source now states differently or does not state at all. The user settles each one. When the source is design notes, run $write-documentation once with every settled amendment. Then check the scratch folder as $basics says under Status, show the final tree and stop.
+
+## What this skill is not
+
+It does not write code and does not commit. It does not decide. A proposal is the user's to accept, amend or reject, and one that goes unanswered is not settled. It does not carry an implementation order, which belongs to the implementation.

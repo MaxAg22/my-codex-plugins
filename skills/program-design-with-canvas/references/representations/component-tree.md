@@ -1,0 +1,40 @@
+# Component tree on the canvas
+
+`program-design`'s component tree reference still says what the part covers, what to read before proposing it and when it fits. The record keeps the text tree.
+
+## Representation
+
+One `component-cards` mock. Each component is a card inside the card of the component that renders it. Each tree root starts a column, and roots that belong together, such as the components that host the same element, share one.
+
+- **Colour each card by the component's kind:** `host` for a component of the host app that only renders the new ones, `provider` for one that holds state and renders nothing of its own, `scope` for one that adds values for everything inside it, `dialog`, `view` for one of the views a parent switches between, `part` for a piece of a view, `button`, and `slot` for a place where the component that renders it puts its own content.
+- **Mark each card as `SKILL.md` describes under Marking the change**: the badge in the top right corner, a solid border for a new card, a dashed one for a touched card and a dotted grey one for an unchanged card. Draw an unchanged card only when it renders a card the change adds or touches.
+- **A card with `row`** lays its children side by side, for views that replace each other.
+- **A slot is a `slot` card named `<slot>`**, inside the card of the component that exposes it. Where the branch defines the component, the slot card is empty. Where a screen uses the component, draw the component as unchanged and put inside each slot card the cards that screen fills it with.
+- **The legend under the cards** lists every colour, then the shared legend of the badges and the borders.
+
+Explain each card with a free-text note beside the diagram, with an arrow pointing at the card's title. In the note, write what the component renders, what state it owns and why it exists rather than staying inline. A component rendered in more than one place gets its notes on one instance, and the other instance gets one note saying it has the same cards. Point each arrow at a spot inside the mock as `canvas` describes, finding the card by its `data-card` attribute, which holds the card's name.
+
+**Centre the mock in its area, with notes on both sides.** Put each note on the side nearest the card it explains: a note on the left points at the card's left edge, and a note on the right at its right edge. Stack each side's notes in the order of their cards, so no arrow crosses a card or another arrow. Before showing the part, check the screenshot for an arrow that crosses a card. When an arrow crosses a card, move the note that the arrow starts from to the other side.
+
+## Example
+
+```js
+{
+  kind: 'component-cards',
+  data: {
+    columns: [
+      [{ name: '<Providers>', kind: 'host', change: 'touched', children: [
+        { name: '<Provider>', kind: 'provider', change: 'new', children: [
+          { name: '<Dialog>', kind: 'dialog', change: 'new', row: true, children: [
+            { name: '<Form>', kind: 'view', change: 'new' },
+            { name: '<Done>', kind: 'view', change: 'new' },
+          ] },
+        ] },
+      ] }],
+      [{ name: '<Host>', kind: 'host', change: 'touched', children: [
+        { name: '<Trigger>', kind: 'button', change: 'new' },
+      ] }],
+    ],
+  },
+}
+```
