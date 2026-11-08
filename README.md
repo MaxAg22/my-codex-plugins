@@ -89,7 +89,7 @@ The project owns its wiki: its location, structure, index, and technology conven
 
 The project also owns its documentation. `docs` explains how to find its documentation folder, read its charter, and follow the charter's rules. `write-documentation`, `explore`, and `design` use that guidance when their procedures require project documentation.
 
-Projects can customize a skill with `.mahou/<skill>.md` and define standing project rules in `.mahou/basics.md`. Local rules take precedence when they conflict with shared skill instructions. The project's `.scratch/<change-slug>/` folder holds artifacts that need to persist between stages, such as design handoffs, prototypes, and drafts.
+The project's `.scratch/<change-slug>/` folder holds artifacts that need to persist between stages, such as design handoffs, prototypes, and drafts.
 
 ## Using with Codex
 

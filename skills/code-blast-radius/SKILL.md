@@ -3,7 +3,7 @@ name: code-blast-radius
 description: Traces what an already-written change reaches. Fans out a tracer per changed element and reports only the places where behavior changes for someone. Use after code is written, before it is reviewed or merged.
 ---
 
-Load $basics first. Then read `.mahou/code-blast-radius.md` if present.
+Load $basics first.
 
 # Code blast radius
 

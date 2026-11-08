@@ -3,7 +3,7 @@ name: validate
 description: Runs a change's manual validation rows against the running system and leaves an evidence report. Takes the manual rows from $test-design, or the scenarios the user names when there is no test design, drives each one through a browser or over HTTP, records what it observed with before and after state, fixes a failing row when the fix only makes the code do what previous decisions settled, and reports every other failure and every bug outside the rows without fixing it. Use after the tests are green, before human-review, or whenever the user asks to see a change working.
 ---
 
-Load $basics first. Then read `.mahou/validate.md` if present: it is where a project says how its local system is brought up, which surfaces it has and how each one is reached and authenticated. When it is absent, the project's own setup carries that: its `AGENTS.md`, its README, its compose or task files. Say what you found before touching anything, and ask when neither says how the system runs.
+Load $basics first. Use the project's own setup instructions in `AGENTS.md`, its README, or its compose or task files to determine how the local system is brought up and reached. Say what you found before touching anything, and ask when none of those explains how the system runs.
 
 # Validate
 

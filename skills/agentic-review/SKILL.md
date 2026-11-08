@@ -3,7 +3,7 @@ name: agentic-review
 description: Refines the code in a change before a human reads it. Runs four facet reviewers and one conventions reviewer per wiki entry and project rule file, fixes what they find without changing how the change looks or behaves, and repeats for up to three rounds. Typed by the user, or invoked by $implement after validation.
 ---
 
-Load $basics first. Then read `.mahou/agentic-review.md` if present.
+Load $basics first.
 
 # Agentic review
 
@@ -27,7 +27,7 @@ A finding whose fix would break any of those becomes a skipped finding in the re
 
 Read the current project diff with `git diff` and staged changes with `git diff --cached`. Include untracked files that belong to the change after checking their paths.
 
-Then settle the conventions list, the sources the conventions reviewers check the change against. When the caller passes one, use it as given. When it does not, follow the wiki indexes, global and local, to the entries about the technologies the diff touches, and add the project's `AGENTS.md` and `.mahou/basics.md` when present. Open every source on the list. Every fix has to follow them.
+Then settle the conventions list, the sources the conventions reviewers check the change against. When the caller passes one, use it as given. When it does not, follow the wiki indexes to the entries about the technologies the diff touches, and add the project's `AGENTS.md` when present. Open every source on the list. Every fix has to follow them.
 
 ## Step 2: Dispatch the facet reviewers
 

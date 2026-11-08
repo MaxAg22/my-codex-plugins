@@ -3,7 +3,7 @@ name: explore
 description: User-guided investigation mode. The user provides context to use as the basis and then steers the investigation one question at a time. The agent reads only that context up front and, for each question, dispatches a scout at exactly what the question needs. Use when the user wants to build their own understanding of a problem before defining a change. Not for producing a report, a plan or a scope.
 ---
 
-Load $basics first, then $docs. Then read `.mahou/explore.md` if present.
+Load $basics first, then $docs.
 
 # Explore
 

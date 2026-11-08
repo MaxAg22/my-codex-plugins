@@ -3,7 +3,7 @@ name: canvas
 description: Draws on a tldraw canvas run from a local app, which the user edits too, with low-fidelity screen mockups, storage cylinders, arrows and free text, and exports it as an SVG. Use when the user asks for a mockup, a sketch or a diagram laid out in space, or when another skill loads it to draw. Mermaid stays the choice for diagrams that live as text in a document, such as sequence, state, ER and flowcharts.
 ---
 
-Load $basics first. Then read `.mahou/canvas.md` if present.
+Load $basics first.
 
 # Canvas
 

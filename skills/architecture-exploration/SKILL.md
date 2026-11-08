@@ -3,7 +3,7 @@ name: architecture-exploration
 description: Draws a system's architecture on a canvas and explores ways to change it with the user. It lays the options out side by side, draws a part they share step by step, and redraws the whole chosen option after each decision the user makes, until one architecture remains. The user edits the same canvas. Use when the user wants to see which parts a system has and how they connect, or to compare options for changing them before a design is settled.
 ---
 
-Load $basics first, then $canvas. Then read `.mahou/architecture-exploration.md` if present.
+Load $basics first, then $canvas.
 
 # Architecture exploration
 

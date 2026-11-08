@@ -3,7 +3,7 @@ name: prototype
 description: Loaded by other skills to show the user a screen element as a working HTML prototype and iterate it with them, round by round, until it matches what they want. Carries how the file is built, how states and interactions are made switchable, how alternatives are offered and how corrections are applied. The loading skill says what the prototype is of and which decisions it stands for.
 ---
 
-Load $basics first. Then read `.mahou/prototype.md` if present.
+Load $basics first.
 
 # Prototype
 

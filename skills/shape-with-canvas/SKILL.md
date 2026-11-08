@@ -3,7 +3,7 @@ name: shape-with-canvas
 description: Runs the shape skill on a canvas instead of in the chat. The canvas is the shape tree, one section per branch with its leaves and its prose; questions, findings and readings are written on it, and the user answers with sticky notes. Use when the user wants to settle the open decisions of a problem and solution definition on a canvas.
 ---
 
-Load $shape first, then $canvas. Then read `.mahou/shape-with-canvas.md` if present.
+Load $shape first, then $canvas.
 
 # Shape with canvas
 

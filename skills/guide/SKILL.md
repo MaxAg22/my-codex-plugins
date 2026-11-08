@@ -3,7 +3,7 @@ name: guide
 description: Routes a goal stated in plain language to the skill that fits it. Use when you are unsure which skill handles the task.
 ---
 
-Load the $basics skill first. Then read `.mahou/guide.md` if present.
+Load the $basics skill first.
 
 Routes a goal to the skill that handles it. Performs no work of its own.
 

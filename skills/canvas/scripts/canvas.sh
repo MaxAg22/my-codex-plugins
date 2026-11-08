@@ -26,7 +26,7 @@ if [[ "$DOC" != *.tldr.json ]]; then
 fi
 
 SKILL_APP="$(cd "$(dirname "${BASH_SOURCE[0]}")/app" && pwd)"
-CACHE="${XDG_CACHE_HOME:-$HOME/.cache}/mahou-canvas"
+CACHE="${XDG_CACHE_HOME:-$HOME/.cache}/codex-canvas"
 APP="$CACHE/app"
 SERVERS="$CACHE/servers"
 FIRST_PORT=5190

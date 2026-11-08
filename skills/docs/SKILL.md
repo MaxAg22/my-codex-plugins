@@ -11,9 +11,8 @@ This skill set does not provide a shared knowledge base about a project. The pro
 
 In this order:
 
-1. `.mahou/basics.md`, when it names one.
-2. A section in the project's `AGENTS.md` pointing at one. Any section naming a documentation folder counts.
-3. A `docs/` directory holding a `README.md`.
+1. A section in the project's `AGENTS.md` pointing at one. Any section naming a documentation folder counts.
+2. A `docs/` directory holding a `README.md`.
 
 When none of these exists, say the project's docs are not set up and ask the user how they want the documentation organized. Never create the folder as a side effect of another skill.
 

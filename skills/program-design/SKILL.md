@@ -3,7 +3,7 @@ name: program-design
 description: Turns a settled system design, or a change proposed in the conversation, into a program design, the level between the design and the code. Works a design tree, proposing each branch's layout, components, state, call path, interfaces and files from the code and the conventions, and settling them with the user one part at a time. Every part is a representation, never code. Use after design, before implementation.
 ---
 
-Load $basics first, then $design-tree and $docs. Then read `.mahou/program-design.md` if present. From `design-tree` this skill takes the tree: its format, its marks, and how the tree records a settled decision as a leaf. It does not take that skill's question mechanics. There are no numbered rounds here and no questions that withhold a preference. This skill proposes, the user corrects, and the tree records what they settled.
+Load $basics first, then $design-tree and $docs. From `design-tree` this skill takes the tree: its format, its marks, and how the tree records a settled decision as a leaf. It does not take that skill's question mechanics. There are no numbered rounds here and no questions that withhold a preference. This skill proposes, the user corrects, and the tree records what they settled.
 
 # Program design
 
@@ -41,7 +41,7 @@ Program design
 
 ## Working the tree
 
-Read the wiki entries for the technologies the change uses and the project's rules that govern it (its `AGENTS.md`, `.mahou/basics.md` and any rule file the project keeps), before proposing the first part. List what you read in the message that proposes the first part.
+Read the wiki entries for the technologies the change uses and the project's rules that govern it (`AGENTS.md` and any other rule file the project keeps), before proposing the first part. List what you read in the message that proposes the first part.
 
 Branches change as the work goes. The user renames, merges, splits or drops them, and a settled branch that reopens goes back to open, as `design-tree` states.
 

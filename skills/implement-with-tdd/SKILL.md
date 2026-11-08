@@ -3,7 +3,7 @@ name: implement-with-tdd
 description: "Implements a designed and test-designed change test first. A tester writes and validates the tests while an implementer writes the code; the session relays feedback between them. Use when the code should be written test first."
 ---
 
-Load $basics first, then $implement. Then read `.mahou/implement-with-tdd.md` if present.
+Load $basics first, then $implement.
 
 # Implement with TDD
 

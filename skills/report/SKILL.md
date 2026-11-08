@@ -3,7 +3,7 @@ name: report
 description: "Loaded by any skill that hands the user a report: findings, an investigation's answer, a summary of a change. Carries the shape a report should take."
 ---
 
-Load $basics first. Then read `.mahou/report.md` if present.
+Load $basics first.
 
 # Report
 

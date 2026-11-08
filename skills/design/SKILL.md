@@ -3,7 +3,7 @@ name: design
 description: Turns a settled problem definition into a system design. Works a design tree one area at a time, from data model to flows to rules, with the user settling every leaf. Hands the tree to $write-documentation so the project's docs record it. Stays above endpoints, functions and files. Use after shape, before $program-design.
 ---
 
-Load $basics first, then $design-tree and $docs. Then read `.mahou/design.md` if present. The tree, the rounds, the question format, the facts rule and how answers grow the tree come from `design-tree` and apply here as written.
+Load $basics first, then $design-tree and $docs. The tree, the rounds, the question format, the facts rule and how answers grow the tree come from `design-tree` and apply here as written.
 
 # Design
 

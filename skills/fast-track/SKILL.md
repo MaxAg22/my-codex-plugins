@@ -3,7 +3,7 @@ name: fast-track
 description: Runs a canvas stage skill (shape-with-canvas, design-with-canvas, program-design-with-canvas, test-design-with-canvas) in fast-track mode. Every branch and part is laid out at once, decisions that earlier artifacts already show become settled leaves without a confirmation round, and only the open decisions are asked. Use when the user asks for a fast track, or asks for a canvas stage with no confirmations and every branch at once. Once on, it holds for every canvas stage run in the same session.
 ---
 
-Load $basics first. Then read `.mahou/fast-track.md` if present.
+Load $basics first.
 
 # Fast track
 

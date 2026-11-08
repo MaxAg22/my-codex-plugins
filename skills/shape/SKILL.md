@@ -3,7 +3,7 @@ name: shape
 description: Finds the holes in a problem and solution definition and fills them with questions, working a design tree in rounds until nothing is left assumed. Stays at the level of behavior and decisions, never implementation. Use after the user has explored a problem and settled its first decisions, and before any design or plan is written.
 ---
 
-Load $basics first, then $design-tree. Then read `.mahou/shape.md` if present. The tree, the rounds, the question format, the facts rule, how answers grow the tree and how the session ends all come from `design-tree` and apply here as written.
+Load $basics first, then $design-tree. The tree, the rounds, the question format, the facts rule, how answers grow the tree and how the session ends all come from `design-tree` and apply here as written.
 
 # Shape
 

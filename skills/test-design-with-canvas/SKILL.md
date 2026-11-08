@@ -3,7 +3,7 @@ name: test-design-with-canvas
 description: Runs the test-design skill on a canvas instead of in the chat. The candidate roots are drawn on a map of the system for the user to pick, and each branch is drawn as a classification tree with its combination matrix under it; the user corrects with sticky notes or by voice. Use when the user wants to design the test cases and manual validations of a settled change on a canvas.
 ---
 
-Load $test-design first, then $canvas. Then read `.mahou/test-design-with-canvas.md` if present.
+Load $test-design first, then $canvas.
 
 # Test design with canvas
 

@@ -3,7 +3,7 @@ name: spike
 description: Answer a design question by building the smallest working version of the real thing and running it against reality. Throwaway code that never merges. Use when a question cannot be settled by reading or asking, like "will this work?" or "what shape should this be?", and only running code can answer it. For a UI element a human reacts to, use prototype instead.
 ---
 
-Load $basics first. Then read `.mahou/spike.md` if present.
+Load $basics first.
 
 # Spike
 

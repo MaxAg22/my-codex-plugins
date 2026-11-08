@@ -3,7 +3,7 @@ name: program-design-with-canvas
 description: Runs the program-design skill on a canvas. Each part of a branch (screen layout, component tree, state) is drawn on the canvas for the user to correct, while the record file keeps the text representation. Use when the user wants to work a program design on a canvas.
 ---
 
-Load $program-design first, then $canvas. Then read `.mahou/program-design-with-canvas.md` if present.
+Load $program-design first, then $canvas.
 
 # Program design with canvas
 

@@ -3,7 +3,7 @@ name: design-with-canvas
 description: Runs the design skill on a canvas instead of in the chat. The canvas is the design tree, one section per branch with its leaves, its representation and its prose; questions, findings and readings are written on it, and the user answers with sticky notes. The recording at the end stays in the chat. Use when the user wants to design a system on a canvas.
 ---
 
-Load $design first, then $canvas. Then read `.mahou/design-with-canvas.md` if present.
+Load $design first, then $canvas.
 
 # Design with canvas
 

@@ -3,7 +3,7 @@ name: explore-with-canvas
 description: Runs the explore skill on a canvas instead of in the chat. The user asks with sticky notes, the skill lays out the answers freely on the canvas with their facts and diagrams, and a decision log grows in one place. Use when the user wants to build their understanding of a problem on a canvas.
 ---
 
-Load $explore first, then $canvas. Then read `.mahou/explore-with-canvas.md` if present.
+Load $explore first, then $canvas.
 
 # Explore with canvas
 

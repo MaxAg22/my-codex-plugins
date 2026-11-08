@@ -3,7 +3,7 @@ name: test-design
 description: "Turns a settled design into the test cases and manual validations that prove it, before the implementation exists, using the Classification Tree Method (CTM): entry points or flows as roots, classifications, partitions, then a combination matrix per branch with each row marked as an automated test, a manual validation, or both. The user settles every level; the skill derives candidates only from what is already decided. Use after design or program design, before implement."
 ---
 
-Load $basics first, then $design-tree, taking from it the tree format and its marks only; the mechanics here are different and stated below. Then read `.mahou/test-design.md` if present. Follow the wiki index to the testing entries for the runners the project uses, and read the project's own testing conventions where it keeps them, usually its `AGENTS.md`: they decide the test level and the naming rule the rows follow.
+Load $basics first, then $design-tree, taking from it the tree format and its marks only; the mechanics here are different and stated below. Follow the wiki index to the testing entries for the runners the project uses, and read the project's own testing conventions where it keeps them, usually its `AGENTS.md`: they decide the test level and the naming rule the rows follow.
 
 # Test design
 

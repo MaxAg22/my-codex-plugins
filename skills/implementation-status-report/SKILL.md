@@ -3,7 +3,7 @@ name: implementation-status-report
 description: Reports where an implement or implement-with-tdd run stands, from the change's implementation-status.md. Gives a short update against the previous report, the highlights since then, and every open item with the context to settle it. Use during either run and at its end, where implement loads it for the final report.
 ---
 
-Load $basics first, then $report. Then read `.mahou/implementation-status-report.md` if present.
+Load $basics first, then $report.
 
 # Implementation status report
 

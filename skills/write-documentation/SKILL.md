@@ -3,7 +3,7 @@ name: write-documentation
 description: Write or update a note in the project's docs folder explaining how one part of the system works, following the project's own charter and templates. Use when the user wants something documented, a mechanism written up, a note brought back in line with the code, or when $design hands over a settled tree to record.
 ---
 
-Load $basics first, then $docs. Then read `.mahou/write-documentation.md` if present.
+Load $basics first, then $docs.
 
 # Write documentation
 

@@ -76,10 +76,6 @@ Projects using these skills keep their own documentation in a folder they own, u
 
 Projects keep the rules that every change respects in an invariants note in their docs folder. The rules cover how the product behaves and how the system is built. Before any decision or proposal, read the docs folder's index, find the invariants note in it, and read the note. Check every decision and proposal against it. When a decision would break a rule in the note, say so in the question that settles the decision and name the rule.
 
-## The local layer
-
-A project can change how a skill behaves in a `.mahou/` folder at its root: `.mahou/basics.md` for standing rules and `.mahou/<skill>.md` for one skill. Every skill reads its own file when present, and local wins over global when the two conflict. The project defines its wiki's location.
-
 ## Reporting to the user
 
 When a skill hands the user a report, such as findings, an investigation's answer, or a summary of a change, it loads $report. That skill carries the shape a report should take: what comes first, when to diagram, how to separate fact from claim, and the unslop rules to hold while writing it.

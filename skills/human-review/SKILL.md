@@ -3,7 +3,7 @@ name: human-review
 description: Reviews the user's observations about an implemented change, verifies each against the code, and waits for the user's decision before editing. Use when the user asks to review a change with them.
 ---
 
-Load $basics first. Then read `.mahou/human-review.md` if present.
+Load $basics first.
 
 # Human review
 
@@ -27,7 +27,7 @@ Present questions first, because an answer can change what should be applied. Th
 
 ## Step 4: Apply what the user decides
 
-Before writing code, read the project's `AGENTS.md` and `.mahou/basics.md` when present, and read the wiki entries for the technologies the fix touches. Follow the project's conventions.
+Before writing code, read the project's `AGENTS.md` when present, and read the wiki entries for the technologies the fix touches. Follow the project's conventions.
 
 Apply only the fixes the user approved, following their decisions. Run the relevant linters and tests, scoped to the files you touched rather than the whole project. Avoid formatting unrelated files.
 
