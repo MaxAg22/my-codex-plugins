@@ -93,15 +93,13 @@ Projects can customize a skill with `.mahou/<skill>.md` and define standing proj
 
 ## Using with Codex
 
-The repository keeps its source folders as `skills/` and `agents/`. Codex discovers project skills from `.agents/skills/` and custom agents from `.codex/agents/`. The repository itself is not a Codex skills directory; install by copying its contents into those folders in the target project.
-
 From the root of the project where you want to use the skills and agents, run:
 
 ```sh
-git clone https://github.com/MaxAg22/my-codex-plugins.git my-codex-plugins && mkdir -p .agents/skills .codex/agents && cp -R my-codex-plugins/skills/. .agents/skills/ && cp -R my-codex-plugins/agents/. .codex/agents/
+curl -fsSL https://raw.githubusercontent.com/MaxAg22/my-codex-plugins/main/install.sh | bash
 ```
 
-Preserve each skill's accompanying references, scripts, and assets. See the [Codex skills documentation](https://developers.openai.com/plugins/concepts/skills) and [Codex subagents documentation](https://learn.chatgpt.com/docs/agent-configuration/subagents).
+The installer downloads the repository into a temporary directory, checks for existing skill or agent names, and stops without copying if it finds a conflict. Otherwise, it creates `.agents/skills/` and `.codex/agents/` if needed and copies the files there. The temporary download is removed when the script exits. Preserve each skill's accompanying references, scripts, and assets.
 
 ### Canvas requirements
 
